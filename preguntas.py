@@ -1,17 +1,4 @@
-"""
-Laboratorio de Programación Básica en Python para Manejo de Datos
------------------------------------------------------------------------------------------
-
-Este archivo contiene las preguntas que se van a realizar en el laboratorio.
-
-No puede utilizar pandas, numpy o scipy. Se debe utilizar solo las funciones de python
-básicas.
-
-Utilice el archivo `data.csv` para resolver las preguntas.
-
-
-"""
-
+import csv
 
 def pregunta_01():
     """
@@ -20,14 +7,20 @@ def pregunta_01():
     Rta/
     214
 
-    """
-    return
+    """       
+    list_text = lectura_documento()
+    
+    respuesta = 0
 
+    for i in range(len(list_text)):
+        respuesta += int(list_text[i][1])
+    
+    return respuesta
 
 def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
-    de tuplas (letra, cantidad), ordendas alfabéticamente.
+    de tuplas (letra, cantidad), ordenadas alfabéticamente.
 
     Rta/
     [
@@ -39,8 +32,26 @@ def pregunta_02():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = []
+    diccionario = {}
 
+    for i in list_text:
+        lista.append((i[0], 1))
+        lista = sorted(lista, key=lambda x: x[0])
+    
+    for key, value in lista:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, sum(value)))
+    
+    return respuesta
 
 def pregunta_03():
     """
@@ -57,8 +68,26 @@ def pregunta_03():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = []
+    diccionario = {}
 
+    for i in list_text:
+        lista.append((i[0], int(i[1])))
+        lista = sorted(lista, key=lambda x: x[0])
+    
+    for key, value in lista:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, sum(value))) 
+
+    return respuesta
 
 def pregunta_04():
     """
@@ -82,8 +111,28 @@ def pregunta_04():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    list_text[0:] = [i + [i[2].split("-")[1]] for i in list_text[0:]]
 
+    lista = []
+    diccionario = {}
+
+    for i in list_text:    
+        lista.append((i[5], 1))
+        lista = sorted(lista, key=lambda x: x[0])
+    
+    for key, value in lista:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, sum(value)))
+    
+    return respuesta
 
 def pregunta_05():
     """
@@ -99,9 +148,27 @@ def pregunta_05():
         ("E", 9, 1),
     ]
 
-    """
-    return
+    """    
+    list_text = lectura_documento()
+       
+    lista = []
+    diccionario = {}
 
+    for i in list_text:        
+        lista.append((i[0], int(i[1])))
+        lista = sorted(lista, key=lambda x: x[0])
+        
+    for key, value in lista:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, max(value), min(value)))
+    
+    return respuesta
 
 def pregunta_06():
     """
@@ -125,8 +192,31 @@ def pregunta_06():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = [i[4].split(",") for i in list_text[0:]]
 
+    diccionario = {}
+    list_P3 = []
+    
+    for i in lista:
+        for j in i:
+            list_P2 = tuple(j.split(":"))
+            list_P3.append(list_P2)
+            
+    list_P3 = sorted(list_P3, key=lambda x: x[0])
+
+    for key, value in list_P3:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(int(value))
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, min(value), max(value)))
+    
+    return respuesta
 
 def pregunta_07():
     """
@@ -149,8 +239,26 @@ def pregunta_07():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = []
+    diccionario = {}
 
+    for i in list_text:
+        lista.append((int(i[1]), i[0]))
+        lista = sorted(lista, key=lambda x: x[0])
+        
+    for key, value in lista:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+
+    respuesta = []
+
+    for key, value in diccionario.items():
+        respuesta.append((key, value))
+        
+    return respuesta
 
 def pregunta_08():
     """
@@ -174,8 +282,32 @@ def pregunta_08():
     ]
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = []
+    diccionario  ={}
 
+    for i in list_text:
+        lista.append((int(i[1]), i[0]))
+        lista = sorted(lista, key=lambda x: x[1])
+        lista = sorted(lista, key=lambda x: x[0])
+        
+    for key, value in lista:
+        
+        if key not in diccionario.keys():
+            diccionario[key] = []    
+        
+        diccionario[key].append(value)
+        
+    respuesta = []
+
+    for key, value in diccionario.items():
+        value = list(set(value))
+        values = "".join(value)
+        values = sorted(values)
+        respuesta.append((key, values))
+    
+    return respuesta
 
 def pregunta_09():
     """
@@ -197,8 +329,34 @@ def pregunta_09():
     }
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = [i[4].split(",") for i in list_text[0:]]
 
+    diccionario = {}
+    list_P3 = []
+
+    for i in lista:
+        for j in i:
+            list_P2 = tuple(j.split(":"))
+            list_P3.append(list_P2)
+
+    list_P3 = sorted(list_P3, key=lambda x: x[0])
+    
+    for key, value in list_P3:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append((len(value)))
+        
+    list_Prob = []
+    
+    for key, value in diccionario.items():
+        list_P = len(value)
+        list_Prob.append((key, list_P))
+                
+    respuesta = {key:value for key, value in list_Prob}
+
+    return respuesta
 
 def pregunta_10():
     """
@@ -218,8 +376,14 @@ def pregunta_10():
 
 
     """
-    return
+    list_text = lectura_documento()
+    
+    respuesta = []
 
+    for i in list_text:        
+        respuesta.append((i[0], len(i[3].split(",")), len(i[4].split(","))))
+        
+    return respuesta
 
 def pregunta_11():
     """
@@ -239,8 +403,36 @@ def pregunta_11():
 
 
     """
-    return
+    list_text = lectura_documento()
+        
+    lista = []
+    diccionario ={}
 
+    for i in list_text:        
+        lista.append((i[3].split(","), int(i[1])))
+        
+    list_tupla = []
+
+    for key, value in lista:        
+        for i in key:
+            list_tupla.append((i, value))            
+
+    list_tupla = sorted(list_tupla, key=lambda x: x[0])
+
+    for key, value in list_tupla:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+    
+    list_prob = []
+    respuesta = {}
+
+    for key, value in diccionario.items():
+            list_prob.append((key, sum(value)))    
+
+    respuesta = {key:value for key, value in list_prob}
+
+    return respuesta
 
 def pregunta_12():
     """
@@ -257,4 +449,77 @@ def pregunta_12():
     }
 
     """
-    return
+    list_text = lectura_documento()
+    
+    lista = []
+    diccionario ={}
+
+    for i in list_text:
+        
+        lista.append((i[0], i[4].split(",") ))         
+
+    list_tupla = []
+    list_tupla_2 = []
+    
+    for key, value in lista:        
+        for i in value:
+            list_tupla.append((key, i.split(":")))
+            
+    for key, value in list_tupla:
+        list_tupla_2.append((key, int(value[1])))
+
+    list_tupla_2 = sorted(list_tupla_2, key=lambda x: x[0])
+
+    for key, value in list_tupla_2:
+        if key not in diccionario.keys():
+            diccionario[key] = []
+        diccionario[key].append(value)
+        
+    list_Prob = []
+
+    for key, value in diccionario.items():
+            list_Prob.append((key, sum(value)))
+
+    respuesta = {key:value for key, value in list_Prob}    
+
+    return respuesta
+
+def lectura_documento():
+    
+    # ================== Lectura del documento csv =============================
+    directory = "data.csv"
+    with open(directory, "r") as file:
+        list_text = file.readlines()        
+    
+    # =================== Eliminación de líneas de carro y tabuladores ========= 
+    list_text = [i.replace("\n", "") for i in list_text]
+    list_text = [i.split("\t") for i in list_text]
+    
+    return list_text
+    
+'''
+result = pregunta_01()
+print(f"La respuesta es 01: {result}")
+result = pregunta_02()
+print(f"La respuesta es 02: {result}")
+result = pregunta_03()
+print(f"La respuesta es 03: {result}")
+result = pregunta_04()
+print(f"La respuesta es 04: {result}")
+result = pregunta_05()
+print(f"La respuesta es 05: {result}")
+result = pregunta_06()
+print(f"La respuesta es 06: {result}")
+result = pregunta_07()
+print(f"La respuesta es 07: {result}")
+result = pregunta_08()
+print(f"La respuesta es 08: {result}")
+result = pregunta_09()
+print(f"La respuesta es 09: {result}")
+result = pregunta_10()
+print(f"La respuesta es 10: {result}")
+result = pregunta_11()
+print(f"La respuesta es 11: {result}")
+result = pregunta_12()
+print(f"La respuesta es 12: {result}")
+'''
